@@ -1,6 +1,6 @@
 package org.backend.trackmate.crud.readbyid;
 
-import org.backend.trackmate.entities.adminUser;
+import org.backend.trackmate.entities.Users;
 import org.backend.trackmate.repositories.UserRepository;
 import org.backend.trackmate.details.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +14,8 @@ public class DetailUserService {
     @Autowired
     UserRepository repository;
 
-    public Optional<adminUser> listUser(Long id){
-        Optional<adminUser> user = repository.findById(id);
+    public Optional<Users> listUser(Long id){
+        Optional<Users> user = repository.findById(id);
 
         if(user.isEmpty()){
         throw new UserNotFoundException(id);

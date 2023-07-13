@@ -1,7 +1,7 @@
 package org.backend.trackmate.crud.read;
 
 
-import org.backend.trackmate.entities.adminUser;
+import org.backend.trackmate.entities.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +21,7 @@ public class ListUserController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<List<adminUser>> listAllUser_whenGetUsers(){
+    public ResponseEntity<List<Users>> listAllUser_whenGetUsers(){
         return ResponseEntity.ok().body(service.listAllUser());
     }
 }
