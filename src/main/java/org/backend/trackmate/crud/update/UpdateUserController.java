@@ -1,7 +1,7 @@
 package org.backend.trackmate.crud.update;
 
 
-import org.backend.trackmate.entities.Users;
+import org.backend.trackmate.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +16,7 @@ public class UpdateUserController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<Users> updateUser_whenPutUser(@PathVariable Long id, @RequestBody Users Users){
-        return ResponseEntity.ok().body(service.updateUser(id, Users));
+    public ResponseEntity<User> updateUser_whenPutUser(@PathVariable Long id, @RequestBody User User){
+        return ResponseEntity.ok().body(service.updateUser(id, User));
     }
 }

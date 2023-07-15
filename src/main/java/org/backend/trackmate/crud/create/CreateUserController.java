@@ -1,6 +1,6 @@
 package org.backend.trackmate.crud.create;
 
-import org.backend.trackmate.entities.Users;
+import org.backend.trackmate.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +18,8 @@ public class CreateUserController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Users> createNewUser_whenPostUser(@RequestBody Users Users) {
-        Users createAdminTable = service.createNewUser(Users);
+    public ResponseEntity<User> createNewUser_whenPostUser(@RequestBody User User) {
+        User createAdminTable = service.createNewUser(User);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(createAdminTable.getId()).toUri();
         return ResponseEntity.created(uri).body(createAdminTable);
     }

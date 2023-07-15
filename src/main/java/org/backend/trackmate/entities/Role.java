@@ -6,8 +6,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Set;
-
 @Entity
 @Data
 @Builder
@@ -21,6 +19,6 @@ public class Role {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "users_id", nullable = false)
-    private Users users;
+    @JoinColumn(name = "roles_id", nullable = false)
+    private User roles;
 }
