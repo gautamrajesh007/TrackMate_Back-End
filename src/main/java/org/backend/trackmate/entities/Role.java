@@ -11,14 +11,14 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "ROLES")
+@Table(name = "roles")
 public class Role {
 
     @Id
     @GeneratedValue
+    @Column(name = "role_id")
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "roles_id", nullable = false)
-    private User roles;
+    @Column(name = "role")
+    private String role;
 }

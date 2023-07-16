@@ -1,5 +1,6 @@
 package org.backend.trackmate.services;
 
+import lombok.Data;
 import org.backend.trackmate.entities.Role;
 import org.backend.trackmate.entities.User;
 import org.backend.trackmate.repositories.RoleRepository;
@@ -13,10 +14,16 @@ import java.util.Arrays;
 import java.util.HashSet;
 
 @Service
+@Data
 public class UserService {
 
+    @Autowired
     private UserRepository userRepository;
+
+    @Autowired
     private RoleRepository roleRepository;
+
+    @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
@@ -28,18 +35,18 @@ public class UserService {
     }
 
     public User findUserByEmail(String email) {
-        return userRepository.findByUsername(email);
+        return userRepository.findByEmail(email);
     }
 
-    public User findUserByUsername(String username) {
-        return userRepository.findByUsername(username);
+    public User findUserByUserName(String userName) {
+        return userRepository.findByUserName(userName);
     }
 
     public User saveUser(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setActive(true);
-        Role userRole = roleRepository.findByRole("admin");
-        user.setRole(new HashSet<Role>(Arrays.asList(userRole)));
+        Role userRole = roleRepository.findByRole("ADMIN");
+        user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
         return userRepository.save(user);
     }
 }

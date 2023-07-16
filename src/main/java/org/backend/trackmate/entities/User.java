@@ -1,6 +1,7 @@
 package org.backend.trackmate.entities;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
@@ -16,14 +17,15 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "USERS")
+@Builder
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "user_id")
     private Long id;
 
-    @Column(name = "user_name")
+    @Column(name = "user_name", nullable = false, unique = true)
     @Length(min = 5, message = "*Your user name must have at least 5 characters")
     @NotEmpty(message = "*Please provide a user name")
     private String userName;
@@ -38,23 +40,27 @@ public class User {
     @NotEmpty(message = "*Please provide your last name")
     private String lastName;
 
-    @Column(name = "email")
+    @Column(name = "email", nullable = false, unique = true)
     @Email(message = "*Please provide a valid Email")
     @NotEmpty(message = "*Please provide your email")
     private String email;
 
-    @Column(name = "phone_no")
+    @Column(name = "phone_no", nullable = false, unique = true)
     @NotEmpty(message = "*Please provide your contact number")
     private Integer phone_no;
 
-    @OneToMany(mappedBy = "role")
-    private Set<Role> role;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "user_role",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles;
 
-    @Column(name = "password")
+    @Column(name = "password", nullable = false, unique = true)
     @Length(min = 5, message = "*Your password must have at least 5 characters")
     @NotEmpty(message = "*Please provide your password")
     private String password;
 
     @Column(name = "active")
     private boolean active;
+
 }
